@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+GrProfessor
+{% endblock %}
+
+{% block content %}
+<h2>PAGINA INICIAL</h2>
+<p>Bem vindo ao meu site,
+    {% if user.is_authenticated %}
+    {{ user.username }}
+    {% else %}
+    Anônimo
+    {% endif %}</p>
+<p><strong>Total de usuários cadastrados: {{ count }}</strong></p>
+{% endblock %}
