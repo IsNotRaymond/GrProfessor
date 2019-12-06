@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib import messages
 from .forms import SignUpForm
 
 
@@ -14,7 +15,8 @@ def signupView(request):
 
         if form.is_valid():
             form.save()
-            return redirect('home')
+            messages.success(request, "Cadastro concluído com sucesso")
+            return redirect('login')
     else:
         form = SignUpForm()
 

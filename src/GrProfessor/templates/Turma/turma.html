@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+GrProfessor - {{ turma.nome_turma }}
+{% endblock %}
+
+{% block content %}
+
+<div class="col text-center">
+    <h2>Turma - {{ turma.nome_turma}}</h2>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        Nesta turma, você pode cadastrar alunos, criar grupos, e também criar atividades
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <a class="btn btn-success btn-lg" href="#" role="button">Importar CSV</a>
+    <a class="btn btn-success btn-lg" href="#" role="button">Cadastrar aluno</a>
+    <a class="btn btn-success btn-lg" href="#" role="button">Criar atividade</a>
+    <a class="btn btn-success btn-lg" href="#" role="button">Criar grupos</a>
+</div>
+
+{% endblock %}

@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'GrProfessor.Authentication',
+    'GrProfessor.Turma',
     'crispy_forms',
+    'bootstrap',
+    'fontawesome',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -128,3 +131,4 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+

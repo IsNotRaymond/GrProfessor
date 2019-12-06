@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+GrProfessor - Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="col text-center">
+    <h2>Dashboard</h2>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        Aqui está sua <strong>Dashboard</strong> nela você pode adicionar quantas turmas você achar necessário. Adicione
+        uma agora
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <a class="btn btn-success btn-lg" href="{% url 'criar-turma' %}" role="button">Cadastrar turma</a>
+</div>
+<div class="list-group mt-5 col-12">
+    {% if turmas %}
+        {% for turma in turmas %}
+            <a href="{% url 'turma' %}?id={{ turma.id }}" class="list-group-item list-group-item-action active mt-2">{{ turma.nome_turma }}</a>
+        {% endfor %}
+    {% endif %}
+
+</div>
+{% endblock %}
