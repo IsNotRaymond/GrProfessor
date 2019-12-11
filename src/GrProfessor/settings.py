@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'GrProfessor.Authentication',
     'GrProfessor.Turma',
+    'GrProfessor.Aluno',
     'crispy_forms',
     'bootstrap',
     'fontawesome',
