@@ -2,12 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Turma
 from .forms import TurmaForm
-from ..Aluno.models import Aluno
 from django.contrib.auth.decorators import login_required
 
 
 @login_required
-def turmaFormView(request):
+def createTurmaView(request):
     form = TurmaForm(request.POST or None)
 
     if form.is_valid():
@@ -22,30 +21,55 @@ def turmaFormView(request):
 
 
 @login_required
-def detailTurmaView(request, id):
-    context = {'turma': Turma.objects.get(id=id),
-               'alunos': Aluno.objects.filter(turma_pertencente=id)}
+def detailTurmaView(request, id_turma):
+    valid = verify_turma(id_turma)
+    if valid:
+        turma = Turma.objects.get(id=id_turma)
+    else:
+        messages.warning(request, "Turma não existente.")
+        return redirect('dashboard')
+
+    context = {'turma': turma}
 
     return render(request, 'Turma/turma.html', context)
 
 
 @login_required
-def updateTurmaView(request, id):
-    turma = Turma.objects.get(id=id)
+def updateTurmaView(request, id_turma):
+    valid = verify_turma(id_turma)
+    if valid:
+        turma = Turma.objects.get(id=id_turma)
+    else:
+        messages.warning(request, "Turma não existente.")
+        return redirect('dashboard')
 
     form = TurmaForm(request.POST or None, instance=turma)
 
     if form.is_valid():
         form.save()
-        messages.success(request, "Os dados foram alterados com sucesso")
+        messages.success(request, "Dados alterados com sucesso")
         return redirect('dashboard')
 
     return render(request, 'Turma/editar_turma.html', {'form': form})
 
 
 @login_required
-def deleteTurmaView(request, id):
-    turma = Turma.objects.get(id=id)
+def deleteTurmaView(request, id_turma):
+    valid = verify_turma(id_turma)
+    if valid:
+        turma = Turma.objects.get(id=id_turma)
+    else:
+        messages.warning(request, "Turma não existente.")
+        return redirect('dashboard')
+
     turma.delete()
-    messages.success(request, "A turma foi deletada com sucesso")
+    messages.success(request, "Turma deletada com sucesso")
     return redirect('dashboard')
+
+
+def verify_turma(key):
+    try:
+        turma = Turma.objects.get(id=key)
+        return True
+    except Turma.DoesNotExist:
+        return False

@@ -32,9 +32,9 @@ GrProfessor - Dashboard
     {% if turmas %}
         {% for turma in turmas %}
             <div class="col text-center">
-                <a class="btn btn-primary col-8 mt-3" href="{% url 'turma' id=turma.id %}" role="button">{{ turma.nome_turma }}</a>
-                <a class="btn btn-success col-1 mt-3" href="{% url 'editar-turma' id=turma.id %}" role="button">Editar</a>
-                <a class="btn btn-danger col-1 mt-3" href="{% url 'deletar-turma' id=turma.id %}" role="button">Excluir</a>
+                <a class="btn btn-primary col-8 mt-3" href="{% url 'turma' id_turma=turma.id %}" role="button">{{ turma.nome_turma }}</a>
+                <a class="btn btn-success col-1 mt-3" href="{% url 'editar-turma' id_turma=turma.id %}" role="button">Editar</a>
+                <a class="btn btn-danger col-1 mt-3" href="{% url 'deletar-turma' id_turma=turma.id %}" role="button">Excluir</a>
             </div>
         {% endfor %}
     {% endif %}

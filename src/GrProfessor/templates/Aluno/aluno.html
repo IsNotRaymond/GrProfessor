@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+GrProfessor - {{ turma.nome_turma }}
+{% endblock %}
+
+{% block content %}
+
+<div class="col text-center">
+    <h2>Alunos - {{ turma.nome_turma}}</h2>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        Listagem dos alunos desta turma
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+
+<div class="alunos mt-5">
+    {% if alunos %}
+        {% for aluno in alunos %}
+            <div class="col text-center">
+                <a class="btn btn-primary col-9 mt-3" href="{% url 'editar-aluno' id_turma=turma.id id_aluno=aluno.id %}" role="button">{{ aluno.nome_aluno}}</a>
+                <a class="btn btn-danger col-2 mt-3" href="{% url 'deletar-aluno' id_turma=turma.id id_aluno=aluno.id %}" role="button">Excluir</a>
+            </div>
+        {% endfor %}
+    {% else %}
+         <div class="col text-center">
+            Nenhum aluno cadastrado nessa turma
+             <a class="btn btn-info col-9 mt-3" href="{% url 'criar-aluno' id_turma=turma.id %}" role="button">Clique aqui para criar algum aluno</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
