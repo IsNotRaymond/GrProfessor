@@ -20,6 +20,8 @@ GrProfessor - {{ turma.nome_turma }}
             <div class="alert alert-{{ message.tags }}">{{ message }}</div>
         {% endfor %}
     {% endif %}
+
+     <a class="btn btn-success btn-lg" href="{% url 'criar-aluno' id_turma=turma.id %}" role="button">Cadastrar aluno</a>
 </div>
 
 

@@ -23,14 +23,16 @@ GrProfessor - {{ turma.nome_turma }}
 
     <a class="btn btn-success btn-lg" href="{% url 'upload-csv' id_turma=turma.id %}" role="button">Importar CSV</a>
     <a class="btn btn-success btn-lg" href="{% url 'criar-aluno' id_turma=turma.id %}" role="button">Cadastrar aluno</a>
-    <a class="btn btn-success btn-lg" href="#" role="button">Criar atividade</a>
-    <a class="btn btn-success btn-lg" href="#" role="button">Criar grupos</a>
+    <a class="btn btn-success btn-lg" href="{% url 'criar-atividade' id_turma=turma.id%}" role="button">Criar atividade</a>
+    <a class="btn btn-success btn-lg" href="{% url 'criar-grupo' id_turma=turma.id %}" role="button">Criar grupos</a>
 </div>
 
 
 <div class="functions mt-5">
     <div class="col text-center">
         <a class="btn btn-primary col-9 mt-3" href="{% url 'aluno' id_turma=turma.id %}" role="button">Listar alunos</a>
+        <a class="btn btn-primary col-9 mt-3" href="{% url 'grupo' id_turma=turma.id %}" role="button">Listar grupos</a>
+        <a class="btn btn-primary col-9 mt-3" href="{% url 'atividade' id_turma=turma.id %}" role="button">Listar atividades</a>
     </div>
 </div>
 {% endblock %}

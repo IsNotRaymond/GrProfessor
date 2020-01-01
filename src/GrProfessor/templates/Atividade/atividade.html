@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+GrProfessor - {{ turma.nome_turma }}
+{% endblock %}
+
+{% block content %}
+
+<div class="col text-center">
+    <h2>Atividades - {{ turma.nome_turma}}</h2>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        Listagem das atividades desta turma
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+     <a class="btn btn-success btn-lg" href="{% url 'criar-atividade' id_turma=turma.id %}" role="button">Criar Atividade</a>
+</div>
+
+
+<div class="atividades mt-5">
+    {% if atividades %}
+        {% for atividade in atividades %}
+            <div class="col text-center">
+                <a class="btn btn-primary col-6 mt-3" href="{% url 'detalhe-atividade' id_turma=turma.id id_atividade=atividade.id %}" role="button">{{ atividade.nome_atividade}}</a>
+                <a class="btn btn-info col-2 mt-3" href="{% url 'editar-atividade' id_turma=turma.id id_atividade=atividade.id %}" role="button">Editar</a>
+                <a class="btn btn-info col-2 mt-3" href="{% url 'deletar-atividade' id_turma=turma.id id_atividade=atividade.id %}" role="button">Excluir</a>
+            </div>
+        {% endfor %}
+    {% else %}
+         <div class="col text-center">
+            Nenhuma atividade cadastrada nessa turma
+             <a class="btn btn-info col-9 mt-3" href="{% url 'criar-atividade' id_turma=turma.id %}" role="button">Clique aqui para criar alguma atividade</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

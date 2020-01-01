@@ -1,5 +1,6 @@
 from django.db import models
 from ..Turma.models import Turma
+from ..Grupo.models import Grupo
 
 
 class Aluno(models.Model):
@@ -10,6 +11,8 @@ class Aluno(models.Model):
                                   help_text="Nome para identificação do aluno")
 
     turma_pertencente = models.ForeignKey(Turma, on_delete=models.CASCADE)
+
+    grupo_pertencente = models.ManyToManyField(Grupo)
 
     def __str__(self):
         return self.nome_aluno

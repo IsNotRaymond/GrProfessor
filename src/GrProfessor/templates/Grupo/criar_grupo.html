@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+GrProfessor - {{ turma.nome_turma }}
+{% endblock %}
+
+{% block content %}
+
+<div class="col text-center">
+    <h2>Turma - {{ turma.nome_turma}}</h2>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        Aqui você pode gerar grupos de duas formas. Digitando a quantidade de grupos ou a quantidade de membros por grupo
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <a class="btn btn-success btn-lg" href="{% url 'criar-grupo-quantidade' id_turma=turma.id %}" role="button">Gerar por quantidade</a>
+    <a class="btn btn-success btn-lg" href="{% url 'criar-grupo-tamanho' id_turma=turma.id %}" role="button">Gerar por tamanho</a>
+</div>
+
+{% endblock %}
