@@ -29,8 +29,6 @@ GrProfessor - {{ turma.nome_turma }}
         <h1>Nome: {{ atividade.nome_atividade }}</h1>
         <p>Descrição: {{ atividade.descricao_atividade }}</p>
         <p>Data de entrega: {{ atividade.data_atividade }}</p>
-        <p>Grupo: {{ atividade.grupo_atribuido }}</p>
-        <p>Aluno: {{ atividade.aluno_atribuido }}</p>
         {% if atividade.grupo_atribuido %}
             <p>Grupo: {{ atividade.grupo_atribuido }}</p>
         {% elif atividade.aluno_atribuido %}

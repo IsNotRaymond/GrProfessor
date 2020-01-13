@@ -53,6 +53,7 @@ def detailAtividadeView(request, id_turma):
 
     return render(request, 'Atividade/atividade.html', context)
 
+
 def sorteio(tipo, key):
     alunos = Aluno.objects.filter(turma_pertencente=key)
     queryset = []
@@ -67,10 +68,13 @@ def sorteio(tipo, key):
         queryset = Aluno.objects.filter(turma_pertencente=key)
 
     for query in queryset:
-        ids.append(query.id)
+        if query is not None:
+            ids.append(query.id)
 
     shuffle(ids)
-    return choice(ids)
+    if len(ids) > 0:
+        return choice(ids)
+    return None
 
 
 @login_required
@@ -88,10 +92,16 @@ def sorteioGrupoView(request, id_turma, id_atividade):
                          "Atividade não existente.")
         return redirect('turma', id_turma)
 
-    atv = Atividade.objects.filter(id=id_atividade)
+    atv = Atividade.objects.get(id=id_atividade)
     gp = sorteio('grupo', id_turma)
 
-    atv(aluno_atribuido=None, grupo_atribuid=Grupo.objects.get(id=gp)).save()
+    if gp is None:
+        messages.warning(request, 'Não existem grupos, gere os grupos e tente novamente')
+        return redirect('criar-grupo', id_turma)
+
+    atv.aluno_atribuido = None
+    atv.grupo_atribuido = Grupo.objects.get(id=gp)
+    atv.save()
 
     messages.success(request, 'Sorteio realizado com sucesso')
     return redirect('atividade', id_turma)
@@ -115,7 +125,9 @@ def sorteioAlunoView(request, id_turma, id_atividade):
     atv = Atividade.objects.get(id=id_atividade)
     al = sorteio('aluno', id_turma)
 
-    atv.aluno_atribuido=Aluno.objects.get(id=al), grupo_atribuido = None).save()
+    atv.grupo_atribuido = None
+    atv.aluno_atribuido=Aluno.objects.get(id=al)
+    atv.save()
 
     messages.success(request, 'Sorteio realizado com sucesso')
     return redirect('atividade', id_turma)
