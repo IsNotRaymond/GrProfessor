@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+GrProfessor - {{ turma.nome_turma }}
+{% endblock %}
+
+{% block content %}
+
+<div class="col text-center">
+    <h2>Eventos - {{ turma.nome_turma}}</h2>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        Listagem dos eventos desta turma
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+     <a class="btn btn-success btn-lg" href="{% url 'criar-evento' id_turma=turma.id %}" role="button">Criar Evento</a>
+</div>
+
+
+<div class="alunos mt-5">
+    {% if eventos %}
+        {% for evento in eventos %}
+            <div class="col text-center">
+                <a class="btn btn-primary col-6 mt-3" href="{% url 'detalhe-evento' id_turma=turma.id id_evento=evento.id %}" role="button">{{ evento.nome_evento }}</a>
+            </div>
+        {% endfor %}
+    {% else %}
+         <div class="col text-center">
+            Não foi criado nenhum evento ainda
+         </div>
+    {% endif %}
+</div>
+{% endblock %}

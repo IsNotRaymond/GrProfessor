@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'GrProfessor.Aluno',
     'GrProfessor.Grupo',
     'GrProfessor.Atividade',
+    'GrProfessor.Evento',
     'crispy_forms',
     'bootstrap',
     'fontawesome',

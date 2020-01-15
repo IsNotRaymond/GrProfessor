@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}
+GrProfessor - {{ turma.nome_turma }}
+{% endblock %}
+
+{% block content %}
+
+<div class="col text-center">
+    <h2>Eventos - {{ turma.nome_turma}}</h2>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        Detalhes do evento
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+     <a class="btn btn-success btn-lg" href="{% url 'criar-evento' id_turma=turma.id %}" role="button">Criar Evento</a>
+</div>
+
+
+<div class="alunos mt-5">
+    <h3>{{ evento.descricao_evento }}</h3>
+    <br>
+    <br>
+    {% if atividades %}
+    <div class="col text-center">
+        <h4>Ordem de apresentação: </h4>
+        {% for atividade in atividades %}
+            <p>{{ atividade.nome_atividade }} -
+                
+                {% if atividade.grupo_atribuido %}
+                    <strong>Grupo: {{ atividade.grupo_atribuido }}</strong></p>
+                {% elif atividade.aluno_atribuido %}
+                    <strong>Aluno: {{ atividade.aluno_atribuido }}</strong></p>
+                {% else %}
+                    <strong>Atividade não sorteada</strong></p>
+                {% endif %}
+
+        {% endfor %}
+    {% else %}
+        <p>NAo deu certo</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

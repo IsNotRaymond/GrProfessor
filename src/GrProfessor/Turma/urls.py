@@ -9,4 +9,5 @@ urlpatterns = [
     path('turma/', include('GrProfessor.Aluno.urls')),
     path('turma/', include('GrProfessor.Grupo.urls')),
     path('turma/', include('GrProfessor.Atividade.urls')),
+    path('turma/', include('GrProfessor.Evento.urls')),
 ]

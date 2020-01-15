@@ -33,6 +33,8 @@ GrProfessor - {{ turma.nome_turma }}
             <p>Grupo: {{ atividade.grupo_atribuido }}</p>
         {% elif atividade.aluno_atribuido %}
             <p>Aluno: {{ atividade.aluno_atribuido }}</p>
+        {% elif atividade.evento_atribuido %}
+            <p>Esta atividade está em um evento</p>
         {% else %}
             <p></p>
             <p>Esta atividade ainda não foi sorteada</p>
